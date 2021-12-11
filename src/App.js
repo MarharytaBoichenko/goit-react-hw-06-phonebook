@@ -13,8 +13,10 @@ export default function App() {
   });
 
   const filter = useSelector((state) => {
+    console.log(state.filter);
     return state.filter;
   });
+  console.log(filter);
 
   const dispatch = useDispatch();
 

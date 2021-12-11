@@ -2,10 +2,10 @@ import { createReducer } from "@reduxjs/toolkit";
 import { changeFilter } from "./actions";
 
 export const filterReducer = createReducer("", {
-  [changeFilter]: (_, action) => {
+  [changeFilter]: (state, action) => {
     // console.log(state);
-    // console.log(action);
-    // console.log(action.payload);
+    console.log(action);
+    console.log(action.payload);
     return action.payload;
   },
 });

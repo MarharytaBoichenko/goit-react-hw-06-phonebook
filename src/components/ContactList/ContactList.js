@@ -1,14 +1,8 @@
 import PropTypes from "prop-types";
 import { ContactItem } from "../ContactItem/ContactItem";
-import { useSelector } from "react-redux";
 import s from "./ContactList.module.css";
 
-const ContactList = () => {
-  const contacts = useSelector((state) => {
-    console.log(state.contacts);
-    return state.contacts;
-  });
-
+const ContactList = ({ contacts }) => {
   return (
     <ul className={s.list}>
       {contacts.map(({ id, name, number }) => {
