@@ -48,7 +48,7 @@ function ContactForm() {
           onChange={nameHandler}
           type="name"
           // name="name"
-          // value={name}
+          value={name}
           className={s.nameInput}
           required
         ></input>
@@ -58,7 +58,7 @@ function ContactForm() {
         <input
           type="tel"
           // name="number"
-          // value={number}
+          value={number}
           onChange={numberHandler}
           className={s.nameInput}
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
