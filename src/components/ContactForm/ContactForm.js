@@ -1,11 +1,18 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { addContacts } from "../../redux/actions";
 
 import s from "./ContactForm.module.css";
 
-function ContactForm({ onSubmit }) {
+function ContactForm() {
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
+
+  const contacts = useSelector((state) => {
+    return state.contacts;
+  });
+  const dispatch = useDispatch();
 
   const nameHandler = (e) => {
     setName(e.target.value);
@@ -16,7 +23,15 @@ function ContactForm({ onSubmit }) {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    onSubmit({ name, number });
+    const nameInContact = name.toLowerCase().trim();
+    const isInContact = contacts.find(
+      (cont) => cont.name.toLowerCase().trim() === nameInContact
+    );
+    if (isInContact) {
+      alert(`${name} is already in contact`);
+      return;
+    }
+    dispatch(addContacts({ name, number }));
     reset();
   };
 
@@ -33,7 +48,7 @@ function ContactForm({ onSubmit }) {
           onChange={nameHandler}
           type="name"
           // name="name"
-          value={name}
+          // value={name}
           className={s.nameInput}
           required
         ></input>
@@ -43,8 +58,8 @@ function ContactForm({ onSubmit }) {
         <input
           type="tel"
           // name="number"
+          // value={number}
           onChange={numberHandler}
-          value={number}
           className={s.nameInput}
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
